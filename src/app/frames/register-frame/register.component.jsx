@@ -8,7 +8,7 @@ export class Register extends React.Component {
 
   render() {
     return (
-      <div className="ms-font-su">
+      <div className="ms-font-su ms-fontColor-teal">
         <span onClick={this.check}>
           {moment().format("hh:mm:ss MMM DD YYYY")}
         </span>

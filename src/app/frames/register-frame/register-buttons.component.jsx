@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   PrimaryButton,
   DefaultButton
 } from "office-ui-fabric-react/lib/Button";
 import { connect } from "react-redux";
+import { REVERSE_BUTTON_GROUP } from "./register.actions";
 
 @connect(state => {
   return { label: state.label };
@@ -15,28 +16,35 @@ export class ButtonSet extends React.Component {
 
   handlePrimaryButtonClick = () => {
     // swap buttons
+    const { dispatch } = this.props;
     this.setState(state => ({ swappedButtons: !state.swappedButtons }));
+    dispatch({ type: REVERSE_BUTTON_GROUP });
   };
 
   render() {
     const { swappedButtons } = this.state;
     const buttonsSet = [
-      <PrimaryButton onClick={this.handlePrimaryButtonClick}>
+      <PrimaryButton
+        className="ms-sm6 ms-md6 ms-lg6"
+        onClick={this.handlePrimaryButtonClick}
+      >
         <span>{this.props.label}</span>
       </PrimaryButton>,
-      <DefaultButton>
-        <span>My another button</span>
+      <DefaultButton className="ms-sm6 ms-md6 ms-lg6">
+        <span>Sign In</span>
       </DefaultButton>
     ];
     return (
-      <p>
-        <b>{swappedButtons ? buttonsSet.reverse() : buttonsSet}</b>
+      <Fragment>
+        <div>{swappedButtons ? buttonsSet.reverse() : buttonsSet}</div>
         {swappedButtons && (
-          <p>
-            <span className="ms-slideRightIn10 ">Reversed</span>
-          </p>
+          <div>
+            <p>
+              <span className=" ms-slideRightIn10">Reversed</span>
+            </p>
+          </div>
         )}
-      </p>
+      </Fragment>
     );
   }
 }
