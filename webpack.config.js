@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
@@ -9,6 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist")
   },
+  mode: "development",
   module: {
     rules: [
       { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
@@ -33,7 +33,6 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
-    }),
-    new CleanWebpackPlugin("dist")
+    })
   ]
 };
